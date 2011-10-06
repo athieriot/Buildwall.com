@@ -1,0 +1,51 @@
+<div class="buildwall-form" id="buildwall-update" style="display:none">
+    <form id="buildwall-form-update">
+        <div class="clear"></div>
+        <h2><span>&{"buildwall.infos.label"}</span></h2>
+
+        <div id="buildwall-update-inputs"></div>
+        <div class="clear"></div>
+        <div class="send_form">
+            <a href="javascript:;" class="button" id="buildwall-update-button"><span>&{'buildwall.update.button'}</span></a>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+
+    var onSubmitUpdate = function() {
+        var name = $('#buildwall-name-input').val();
+        var buildsPerScreen = $('#buildwall-builds-per-screen-input').val();
+        var wallKey = $('#buildwall-wallkey-input').val();
+        var wallId = $('#buildwall-wallid-input').val();
+        $.ajax({
+            url: '@{BuildWallAPI.update()}',
+            success: drawWall,
+            data: ({  'name' : name,
+                'buildsPerScreen' : buildsPerScreen,
+                'wallId' : wallId,
+                'wallKey' : wallKey}),
+            type: "POST",
+            error: function() {
+                //alert('error');
+            }
+        });
+    };
+
+    $(document).ready(function() {
+        $('#buildwall-update-button').click(function(e) {
+            e.preventDefault();
+            $('#buildwall-form-update').submit();
+        });
+
+        $('input').keypress(function(e){
+              if(e.which == 13){
+                  e.preventDefault();
+                  $('#buildwall-form-update').submit();
+              }
+         });
+    });
+
+</script>
+
+#{jQueryValidate formId:"buildwall-form-update", class:models.Wall.class, key:'wall', onSubmit:'onSubmitUpdate' /}

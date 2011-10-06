@@ -1,0 +1,95 @@
+
+[TODO]
+
+== En route pour la prod 
+[DONE]
+
+== Ouverture de l'offre payante "Start"
+[1] Lien contact KO
+[1] Corriger / améliorer le contenu statique
+[1] Page About (avec Contact).
+[1] Page de Documentation (vidéo ?).
+[2] Faire des vidéos/screencast pour l'installation
+[3] Faire des tutos sous forme de documentation pour l'installation (screenshots)
+[3] mails à l'inscription
+[3] validation d'email.
+[3] récupération du mot de passe.
+[3] page Account (modification email, mot de passe)
+[3] Faire l'API (basé sur ID / WALL KEY)
+[3] Gérer les licences (build max, wall max, date de fin)
+[3] Google analytics
+Affichage plus joli
+
+== Ouverture de l'offre "Medium" et "Large"
+[3] Plugin bamboo, Continuum, Cruise Control (un autre ?)
+[3] Gestion des profils d'accès (admin, API et multiscreen en fonction de licence)
+[3] Multiscreen (pagination des builds).
+[3] affichage des descriptions plutot que les authors reçus
+[4] Page d'administration (activer / desactiver un compte / modifier la date de fin)
+[4] Option de conservation des builds failed visible.
+[4] Style pour mobile
+[4] page Account (renouvellement licence)
+[4] mail avant l'expiration de la licence.
+[5] Livrer sur playapps ?
+
+== And beyond ==
+[2] Pages d'erreurs sympa.
+[2] access denied => css page de login
+[2] Module migrate.
+[4] Code quality : Tests Unitaires, d'intégration, Selenium... (And go TDD NOW !!)
+[4] Onglet Hudson
+[5] Traduire le site dans d'autres langues ?
+[5] Plus d'infos sur le build.
+[5] Photo en fonction de la couleur du build.
+[5] Pas d'enregistrement pour les comptes gratuits ? (Avec pub ?)
+[5] Traduction Mentions Légales et Conditions générales (copier / coller de twitter... avec adaptations) 
+wall-hudson-plugin download does not have a version in the filename
+add a button test that it works which sends a random build fail to the right wall
+
+Sur la meme instance Hudson envoyer sur plusieurs comptes differents
+When name does not match draw at least the name.
+Valeur par defaut 9 pour les build screen
+Utilité d'un cookie d'erreur pour l'API ?
+Utilité d'un cookie de session pour l'API ?
+
+renvoyer des messages d'erreur http propre lors des erreurs d'API
+build failed toujours visible en option.
+rotation des image en options
+Basic auth
+accès buildwall by URL non connecté.
+validation CSS HTML strict and co.
+
+
+[Solutions alternatives]
+- Cradiator
+- Team piazza
+- Team wall
+http://code.google.com/p/bigvisiblecruise/
+
+[notifier]
+HUDSON http://wiki.hudson-ci.org/display/HUDSON/Notifo+Plugin
+Bamboo http://wiki.hudson-ci.org/display/HUDSON/Bamboo+Notifier
+
+Bamboo notification hhelp :
+
+   1. Click 'Home' to go to the Dashboard.
+   2. Click the 'All Plans' tab.
+   3. Locate the plan in the list and click the 'Edit' icon:
+   4. The Plan's Configuration pages will be displayed. Click the 'Notifications' tab to display the Plan's current Notifications settings.
+   5. The 'Notifications' that you currently have set up will be displayed (see screenshot below). Add a new notification in the 'Add Build Notification' section as follows:
+          * Select the type of 'Event' you want to be notified about. Refer to the list of events (above) for details.
+          * Specify the 'Recipient':
+                o 'User' — Type the username of the appropriate Bamboo user; or click the following icon to select from a list of users:
+                o 'Group' — Type the name of the appropriate Bamboo group(s).
+                o 'Email Address' — This is useful if you need to send email notifications to a person who is not a Bamboo user. Type the appropriate email address. Please note, that if you specify the email address of an existing Bamboo user, the user will receive notifications, even if they have elected not to receive notifications in their user preferences.
+                o 'IM Address' — This is useful if you need to send Instant Messenger (IM) notifications to a person who is not a Bamboo user. Type the appropriate IM address.
+                  If you specify a broadcast address (eg. 'project-x@broadcast.chat.mycompany.com'), Bamboo will not know the context of related IM responses.
+                  If you specify the IM address of an existing Bamboo user, the user will receive notifications, even if they have elected not to receive notifications in their user preferences.
+                o 'Committers' — A committer is the Bamboo user(s) who committed code to a particular build (i.e. someone who committed code after the previous build was checked out by Bamboo).
+                o 'Watchers' — A plan's watchers are the Bamboo users who have marked this plan as one of their favourites.
+   6. Click the 'Add' button.
+   7. Repeat steps 5 and 6 until you have added all the build notifications that you wish to enable for this plan.
+   8.
+
+      Click the 'Save' button to save your changes.
+

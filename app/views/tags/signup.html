@@ -1,0 +1,137 @@
+		
+		%{
+   			user = _user;
+		}%
+		
+		#{ifErrors}
+		<div class="error">
+			<p>Oops, please correct these errors</p>
+		</div>
+		#{/ifErrors}
+
+		#{form id:'joinForm', action:@Application.handleSignup()}
+
+		<h2>
+			<span>&{'signup.account.title'}</span>
+		</h2>
+
+		#{field 'user.username'}
+		<p>
+			<label for="${field.id}">&{'signup.desired.username'} : </label>
+			<input id="${field.id}" type="text" name="${field.name}" value="${field.value}"
+				class="${field.errorClass} text_field required" />
+			#{if _userAlreadyExists}
+				<label for="user_firstname" class="error">&{'user.already.exist'}</label>
+			#{/if}
+			<span class="error">${field.error}</span>
+		</p>
+		#{/field}
+
+		#{field 'user.firstname'}
+		<p>
+			<label for="${field.id}">&{'signup.firstname'} : </label>
+			<input id="${field.id}" type="text" name="${field.name}" size="30"
+				value="${field.value}" class="${field.errorClass} text_field required" />
+			<span class="error">${field.error}</span>
+		</p>
+		#{/field}
+
+		#{field 'user.lastname'}
+		<p>
+			<label for="${field.id}">&{'signup.lastname'} : </label>
+			<input id="${field.id}" type="text" name="${field.name}" size="30"
+				value="${field.value}" class="${field.errorClass} text_field required" />
+			<span class="error">${field.error}</span>
+		</p>
+		#{/field}
+
+		#{field 'user.password'}
+		<p>
+			<label for="${field.id}">&{'signup.password'} : </label>
+			<input id="${field.id}" type="password" name="${field.name}"
+				value="${field.value}" class="${field.errorClass}  text_field required" />
+			<span class="error">${field.error}</span>
+		</p>
+		#{/field}
+
+		#{field 'user.passwordConfirm'}
+		<p>
+			<label for="${field.id}">&{'signup.confirm.password'} : </label>
+			<input id="${field.id}" type="password" name="${field.name}"
+				value="${field.value}" class="${field.errorClass}  text_field required" />
+			<span class="error">${field.error}</span>
+		</p>
+		#{/field}
+
+		#{field 'user.email'}
+		<p>
+			<label for="${field.id}">&{'signup.email'} : </label>
+			<input id="${field.id}" type="email" name="${field.name}" size="30"
+				value="${field.value}" class="${field.errorClass}  text_field required" />
+			<span class="error">${field.error}</span>
+		</p>
+		#{/field}
+
+		#{field 'user.emailConfirm'}
+		<p>
+			<label for="${field.id}">&{'signup.confirm.email'} : </label>
+			<input id="${field.id}" type="email" name="${field.name}" size="30"
+				value="${field.value}" class="${field.errorClass} text_field required" />
+			<span class="error">${field.error}</span>
+		</p>
+		#{/field}
+
+		<div class="clear"></div>
+
+		<h2><span>&{'signup.billing.title'}</span></h2> 
+		 
+		 #{field 'user.company'}
+		<p>
+			<label for="${field.id}">&{'signup.company'} : </label>
+			<input id="${field.id}" type="text" name="${field.name}" size="30"
+				value="${field.value}" class="${field.errorClass}  text_field" />
+			<span class="error">${field.error}</span>
+		</p>
+		#{/field}
+		
+		#{field 'user.termsOfUse'}
+		<p>
+			<label id=label_${field.id}" for="${field.id}">&{'signup.terms'} : </label>
+			<input id="${field.id}" type="checkbox" value="true" #{if field.value}checked="true" #{/if} name="user.termsOfUse" class="${field.errorClass} text_field " />
+			<span class="infos">
+				&{'signup.terms.infos', '/terms' }
+        	</span>
+			<span class="error">#{if field.error}&{'signup.terms.error.infos'}#{/if}
+			</span>
+		</p>
+		#{/field}
+		
+		 <div class="send_form"> 
+		 	<a id="create-button" href="javascript:;" class="button submit"><span>&{'signup.button.text'}</span></a> 
+		 </div> 
+		#{/form}
+
+<script type="text/javascript">
+
+     var onSubmitJoinForm = function(form) {
+				$("#joinForm").ajaxSubmit(function(data){ //Ajax Submit
+					$('#signup-left').html(data);
+					initPage();
+				});
+			}
+
+    $(document).ready(function() {
+		$('div#header li').removeClass('active');
+		$('div#header li:contains("&{'header.signup'}")').addClass('active');
+		initStyle();
+
+		$('form#joinForm input').keypress(function(e){
+		      if(e.which == 13){
+		    	  e.preventDefault();
+		    	  $('#joinForm').submit();
+		      }
+	     });
+	});
+</script>
+
+#{jQueryValidate formId:'joinForm', class:models.User.class, key:'user', onSubmit:'onSubmitJoinForm' /}

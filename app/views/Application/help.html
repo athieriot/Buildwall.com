@@ -1,0 +1,64 @@
+<div class="header page">
+	<h1>Help</h1>
+</div>
+
+<div id="tour" class="padding">
+<p>This buildwall is able to show informations coming from a continuous integration server on a screen. It works by installing a plugin into your integration server, configuring it to send the information you want to the BuildWall. The BuildWall listen to the plugin and display information directly.</p>
+
+    <h2>Gathering the pieces</h2>
+
+<p>You need two pieces to use BuildWall :</p>
+
+   <ul><li>A continuous integration server, we currently provide integration for TeamCity and Hudson.</li>
+   <li>A computer on which you can dedicate the screen to the tools.</li> </ul>
+
+<h2>Install the plugin in your CI server</h2>
+
+<b>to be done</b>
+
+The only configuration you need to provides is the the url of the BuildWall.
+
+    <h2>Run the buildWall</h2>
+ <b>to be done</b>
+
+<p>whole screen should look something like :</p>
+
+<p>When events are sent from the plugin to the BuildWall you may see this :</p>
+
+<p>The screen layout is adapted to the number of event, it tries to make best use of the screen real estate. Build color could be :</p>
+
+    <ul><li>Green : You're good to go.</li>
+    <li>Red : Build Failed</li>
+    <li>Yellow : Build currently running.</li> </ul>
+
+<p>Build are displayed from right to left, and top to bottom.</p>
+
+
+<h2>Quit the buildWall</h2>
+
+<p>The wall can be terminated by issuing a click in the interface.</p>
+
+    <h2>Using Faces</h2>
+
+<p>You can assign username to faces (images).</p>
+
+
+<p>Once done you may see this : </p>
+
+<h2>Interacting Manually with the wall</h2>
+
+<p>To check if the buildwall works you can trigger a build result by issuing directly a http command.</p>
+
+<p>Issuing a</p>
+
+curl -X get http://www.buildwall.com/1/abcdefgh/publish?project=foo&status=failed
+
+<p>Optionally you can add a category and/or authors</p>
+
+curl -X get http://www.buildwall.com/1/abcdefgh/publish?project=foo&status=failed&category=trunk&authors=Barnabe
+
+<p>If multiple authors are present, they must be separated with a comma</p>
+
+curl -X get http://www.buildwall.com/1/abcdefgh/publish?project=foo&status=failed&category=trunk&authors=Barnabe,Dorothe
+
+</div>

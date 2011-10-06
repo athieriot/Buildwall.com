@@ -1,0 +1,29 @@
+<div id="header">
+
+    <div class="page">
+
+        <div class="connected" id="header-welcome">
+            &{'header.welcome'} <span id="username-welcome"></span>. <a href='@{Secure.logout()}'>&{'header.logout'}</a>
+        </div>
+        <div class="not-connected" id="header-login">
+            <a id="link-login" href="javascript:;">&{'header.login'}</a>
+            #{login /}
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="menu_nav" class="page">
+        <a href="#!@{Application.home()}" class="logo">Buildwall</a>
+        <ul>
+            <li><a href="#!@{Application.home()}">&{'header.home'}</a></li>
+            <li class="connected"><a href="#!@{BuildWall.wall()}">&{'header.wall'}</a></li>
+            <li class="connected"><a href="#!@{Team.team()}">&{'header.team'}</a></li>
+            <li class="not-connected"><a href="#!@{Application.pricing()}">&{'header.pricing'}</a></li>
+        </ul>
+    </div>
+    <div class="clear"></div>
+</div>
+
+
+	
+	
+	

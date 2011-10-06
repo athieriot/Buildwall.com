@@ -1,0 +1,29 @@
+#{extends 'main.html' /}
+
+<div id="login">
+	
+	<h1>&{'secure.title'}</h1>
+		
+		#{form @Secure.authenticate()}
+		
+	#{if flash.error}
+		<p class="error">
+			&{flash.error}
+		</p>
+	#{/if}
+	#{if flash.success}
+		<p class="success">
+			&{flash.success}
+		</p>
+	#{/if}
+ 	
+ 	#{loginFields /}
+ 	
+ 	<p id="signin-field">
+		<input type="submit" id="signin" value="&{'secure.signin'}" />
+	</p>
+	
+#{/form}
+	
+		
+</div>

@@ -1,0 +1,24 @@
+#{extends 'main.html' /}
+#{set title:'FullScreen Build Wall' /}
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        window.onresize = function() {
+            $('#buildList').height($('body').height());
+            $('#buildList').width($('body').width());
+            drawBrick();
+        };
+
+        $('#buildList').height($('body').height());
+        $('#buildList').width($('body').width());
+        $('#buildList').css('margin-left', '0px');
+
+        $('body').click(function() {
+            window.close();
+        });
+
+    });
+</script>
+#{wall/wall wallKey:wKey, wallId:wId/}
+

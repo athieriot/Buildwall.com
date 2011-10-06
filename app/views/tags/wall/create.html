@@ -1,0 +1,47 @@
+<div class="buildwall-form" id="buildwall-create" style="display:none">
+    <form id="buildwall-form-create">
+        <p id="buildwall-create-message">&{"buildwall.create.message"}</p>
+
+        <div class="clear"></div>
+        <h2><span>&{"buildwall.infos.label"}</span></h2>
+        <div id="buildwall-create-inputs"></div>
+        <div class="clear"></div>
+        <div class="send_form">
+            <a href="javascript:;" class="button" id="buildwall-create-button"><span>&{'buildwall.create.button'}</span></a>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+
+    var onSubmitCreate = function() {
+        var name = $('#buildwall-name-input').val();
+        var buildsPerScreen = $('#buildwall-builds-per-screen-input').val();
+        $.ajax({
+            url: '@{create()}',
+            success: drawWall,
+            data: ({'name' : name, 'buildsPerScreen' : buildsPerScreen}),
+            type: "PUT",
+            error: function() {
+                //$('form span.error').fadeIn('slow');
+            }
+        });
+    };
+
+    $(document).ready(function() {
+        $('#buildwall-create-button').click(function(e) {
+            e.preventDefault();
+            $('#buildwall-form-create').submit();
+        });
+
+        $('input').keypress(function(e){
+              if(e.which == 13){
+                  e.preventDefault();
+                  $('#buildwall-form-create').submit();
+              }
+         });
+    });
+
+</script>
+
+#{jQueryValidate formId:"buildwall-form-create", class:models.Wall.class, key:'wall', onSubmit:'onSubmitCreate' /}

@@ -1,0 +1,39 @@
+<div class="header page">
+	<h1>Signup</h1>
+</div>
+
+<div id="signup" class="padding">
+
+	<div id="signup-left" class="left">
+
+	 #{signup user:user /}
+
+	</div>
+
+	<div class="right">
+		<div class="sidebar_box">
+			<h4>&{'signup.instructions.title'}</h4>
+			<p>&{'signup.instructions'}</p>
+		</div>
+
+		<div class="sidebar_box">
+			<h4>&{'signup.politics.title'}</h4>
+			<ul>
+				<li>&{'signup.nospam'}</li>
+				<li>&{'signup.noads'}</li>
+			</ul>
+		</div>
+
+		<div class="sidebar_box">
+			<h4>&{'signup.contactus.title'}</h4>
+			<p>&{'signup.contactus.question'}<a id="signup-contactus" href="mailto:contact@buildwall.com">&{'signup.contactus'}</a>!</p>
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<script type="text/javascript" >
+	$(document).ready(function() {
+		//$('a#signup-contactus').click(redirectLink);
+	});
+</script>

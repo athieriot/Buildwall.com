@@ -1,0 +1,175 @@
+#buildwall.notice.title=Comment ça marche ?
+#buildwall.notice=Une fois que vous avez créé votre BuildWall, téléchargez le plugin correspondant à votre outil d'intégration continue, puis configurez le avec l'URL fournie.<br/><br/>Passez en mode plein écran à tout moment, appuyer ensuite sur F11.<br/> Cliquez simplement sur l'écran pour revenir en mode normal.
+#application.feature.1.title=Tous les avantages du Cloud
+#application.feature.1=Votre BuildWall est hébergé sur le cloud, garantie de maîtrise des coûts et de continuité de service. La tarification est adaptée à la taille et aux besoins de votre entreprise !
+#application.feature.2.title= Gravatar
+#application.feature.2=Buildwall est compatible avec le service <a target="_blank" href="http://gravatar.com">Gravatar</a>, cela permet à vos collaborateurs de modifier leur avatar simplement et à tout moment !
+#application.feature.3.title=Intégration rapide
+#application.feature.3=Grâce à notre API, intégrez facilement BuildWall à votre usine logiciel. La communauté opensource a déjà développé deux plugins pour <a target="_blank" href="http://hudson-ci.org">Hudson</a> et <a target="_blank" href="http://www.jetbrains.com/teamcity">Team City</a>. Profitez en !
+#application.infos.title= BuildWall
+#application.infos=Le service en ligne Buildwall permet d'afficher les informations concernant l'état de votre usine logicielle sur un ou plusieurs écrans. <br/>Grâce à son API, il est facile d'intégrer Buildwall à votre outil d'intégration continue et de customiser votre mur pour répondre à votre besoin. <br/> Notre équipe est à votre écoute, n'hésitez pas à nous transmettre vos idées d'amélioration.
+#application.free.trial=Entièrement gratuit pendant la beta. Profitez en !
+#application.text.connected=Accéder dès maintenant à votre
+#
+#signup.instructions.title=Informations
+#signup.instructions=Les informations d'inscriptions seront utilisées uniquement lors de la facturation.<bt/> Attention, pendant la Beta, votre compte pourra être supprimé à tout moment, sans préavis.
+#signup.politics.title=Notre politique
+#signup.nospam=Aucun spams
+#signup.noads=Aucune publicité
+#signup.contactus.title=Contact Us
+#signup.contactus.question=Encore des questions ?
+#signup.contactus=Contactez nous
+#
+#user.already.exist=Ce nom d'utilisateur est déjà pris !
+
+# You can specialize this file for each language.
+# For example, for French create a messages.fr file
+#
+
+general.or=ou
+
+#meta.description=For TeamCity and Hudson. Display information of build lines preferably on a large screen within an office, supports multiple build lines, custom images and Gravatar.
+secure.title=
+#secure.password=Mot de passe :
+#secure.remember=Se souvenir de moi
+secure.signin=Connexion
+secure.logout=Vous avez été déconnecté.
+secure.create=Créer !
+#secure.login=Utilisateur :
+secure.login.error=Oops, unknown user or password.
+secure.create.error=Oops, ce nom d'utilisateur est déjà pris !
+secure.cancel=annuler
+
+header.logout=logout
+header.welcome=Bienvenue
+header.wall=Build Wall
+header.pricing=Abonnement
+header.contact=Contact
+header.blog=Blog
+header.tour=Tour
+header.home=Accueil
+header.about=A propos
+header.api=API
+header.support=Support
+header.account=Compte
+header.login=connexion
+
+
+footer.about=A propos
+footer.support=Support
+footer.api=Api
+footer.legals=Mentions légales
+footer.jobs=Emploi
+footer.blog=Blog
+footer.contact=Contact
+
+buildwall.create.message=Oops, pas encore de Buildwall. Créer le votre dès maintenant !
+buildwall.create.button=Créer !
+buildwall.delete.all.button=supprimer ce mur
+buildwall.name=Nom
+buildwall.url.message=Félicitations ! Vous pouvez maintenant configurer votre plugin avec cette URL:
+buildwall.fullscreen=Plein écran
+buildwall.normalscreen=Normal
+buildwall.title=Oops
+buildwall.infos.label=Infos du Build Wall
+buildwall.plugin.title=Téléchargements
+buildwall.plugin.hudson=Plugin Hudson
+buildwall.plugin.teamcity=Plugin Team City
+buildwall.plugin.bamboo=Plugin Bamboo
+buildwall.contactus= Contactez nous
+buildwall.contactus.title=Contactez nous
+buildwall.contactus.question=Encore des questions ? 
+buildwall.notice.title=Comment ça marche ?
+buildwall.notice=Une fois que vous avez créé votre BuildWall, téléchargez le plugin correspondant à votre outil d'intégration continue, puis configurez le avec l'URL fournie.<br/><br/>Passez en mode plein écran à tout moment, appuyez ensuite sur F11.<br/> Cliquez simplement sur l'écran pour revenir en mode normal.
+buildwall.no.data.yet=En attente ...
+buildwall.buildsPerScreen=Build par écran
+buildwall.error.infos=doit être un nombre
+buildwall.config=Configuration
+buildwall.update.button=Sauver
+
+application.signup.now=Enregistrez vous vite !
+application.buildwall=Build Wall
+application.feature.1.title=Tous les avantages du Cloud
+application.feature.1=Votre BuildWall est hébergé sur Internet, garantie de maîtrise des coûts et de continuité de service. L'abonnement est adapté à la taille et aux besoins de vos équipes !
+application.feature.2.title= Gravatar
+application.feature.2=Buildwall est compatible avec le service <a target="_blank" href="http://gravatar.com">Gravatar</a>, cela permet à vos collaborateurs de modifier leur avatar simplement et à tout moment !
+application.feature.3.title=Intégration rapide
+application.feature.3=Grâce à son API, intégrez facilement BuildWall à votre usine logicielle. Plusieurs plugins <a target="_blank" href="https://github.com/buildwall">open source</a> ont été développés  pour <a target="_blank" href="http://hudson-ci.org">Hudson</a>, <a target="_blank" href="http://www.jetbrains.com/teamcity">Team City</a> and <a target="_blank" href="http://www.atlassian.com/software/bamboo/">Bamboo</a>. Profitez en !
+application.infos.title= BuildWall
+application.infos=Le service en ligne Buildwall permet d'afficher les informations concernant l'état de votre usine logicielle sur un ou plusieurs écrans. <br/>Grâce à son API, il est facile d'intégrer Buildwall à votre outil d'intégration continue et de personnaliser votre mur. <br/><br/> Notre équipe est à votre écoute, n'hésitez pas à nous transmettre vos idées d'amélioration : <a href="mailto:contact@buildwall.com">contact@buildwall.com</a> ou sur <a href="http://www.twitter.com/Buildwall"><img style="position:absolute;" src="http://twitter-badges.s3.amazonaws.com/twitter-b.png" alt="Follow Buildwall on Twitter"/></a>.
+application.free.trial=Entièrement gratuit pendant la beta. Profitez en!
+application.text.connected=Accèder dès maintenant à votre 
+
+pricing.select.plan=Sélectionner
+pricing.max.builds=Builds par écran
+pricing.max.walls=Nombre max de Wall
+pricing.api.access=Accès à l'API
+pricing.multiscreen=Multi écran
+pricing.plan1.title=Non commercial
+pricing.plan1.price=Gratuit
+pricing.plan2.title=Start
+pricing.plan2.price=€4.90 par mois
+pricing.plan3.title=Medium
+pricing.plan3.price=€9.90 par mois
+pricing.plan4.title=Large
+pricing.plan4.price=€19.90 par mois
+pricing.plan1.max.builds=9 *
+pricing.plan2.max.builds=9
+pricing.plan3.max.builds=16
+pricing.plan4.max.builds=25
+pricing.plan1.max.walls=1
+pricing.plan2.max.walls=2
+pricing.plan3.max.walls=5
+pricing.plan4.max.walls=12
+pricing.coming.soon=Bientôt disponible
+pricing.faq2.title=Besoin d'une formule plus importante ?
+pricing.faq2=Pas de problème, contactez nous sur support@buildwall.com nous vous ferons une offre personnalisée. Nous offrons également une version installable.
+pricing.faq3.title=Il y a t'il une période d'essai ?
+pricing.faq3=Oui, il y a 30 jours d'essai sur toutes les formules.
+pricing.faq1.title=* Beta non limitée
+pricing.faq1=Vous pouvez afficher autant de build que vous le souhaitez pendant la beta. Profitez en !
+pricing.faq4.title=
+pricing.faq4=
+
+signup.instructions.title=Instructions
+signup.instructions=Les informations d'inscription seront utilisées uniquement lors de la facturation.<br/> Attention, pendant la beta, votre compte pourra être supprimé à tout moment, sans préavis.
+signup.politics.title=Notre politique
+signup.nospam=Aucun spam
+signup.noads=Aucune publicité
+signup.contactus.title=Contactez nous
+signup.contactus.question=Encore des questions ?
+signup.contactus= Contactez nous
+signup.account.title=Compte
+signup.desired.username=Nom d'utilisateur
+signup.firstname=Prénom
+signup.lastname=Nom
+signup.password=Mot de passe
+signup.confirm.password=Confirmation mot de passe
+signup.email=Email
+signup.confirm.email=Confirmez l'email
+signup.billing.title=Informations de facturation
+signup.company=Nom de l'entreprise
+signup.terms=J'accepte les conditions d'utilisation
+signup.terms.infos=Cochez cette case pour accepter les <a target="_blank" href="#!/terms">conditions d'utilisation</a>.
+signup.button.text=Validez
+user.already.exist=Ce nom d'utilisateur est déjà pris !
+
+header.team=Equipe
+team.title=Equipe
+team.notice.title=Que doit-je faire ?
+team.notice=Pour configurer votre équipe, ajouter des membres puis associez leurs comptes gravatar avec les alias envoyés par votre usine logicielle.
+team.notice2.title=Information
+team.notice2=Cette page permet de mapper les alias envoyés par votre serveur d'intégration avec les avatars de votre équipe.
+team.new=ajouter une personne
+team.description=Gravatar (email) ou description :
+team.aliases=Alias (séparés par des virgules):
+team.save=sauver
+team.delete=supprimer
+
+tour.team=Configurer une équipe
+tour.fullscreen=Afficher en plein écran
+tour.wall=Créer un mur
+tour.bamboo=Plugin Bamboo
+tour.hudson=Plugin Hudson
+tour.teamcity=Plugin Team City
+

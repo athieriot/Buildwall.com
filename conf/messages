@@ -1,0 +1,152 @@
+# You can specialize this file for each language.
+# For example, for French create a messages.fr file
+#
+general.or=or
+
+meta.description=For TeamCity, Hudson or Bamboo. Radiator to display information of build lines preferably on a large screen within an office, supports multiple build lines, custom images and Gravatar.
+secure.title=
+secure.password=Password:
+secure.remember=Remember me
+secure.signin=Sign in
+secure.logout=You have been logged out.
+secure.create=Create !
+secure.login=User:
+secure.login.error=Oops, unknown user or password.
+secure.create.error=Oops, user already exist.
+secure.cancel=cancel
+
+header.logout=sign out
+header.welcome=Welcome
+header.wall=Build Wall
+header.pricing=Pricing
+header.contact=Contact
+header.blog=Blog
+header.tour=Tour
+header.home=Home
+header.about=About
+header.api=API
+header.support=Support
+header.account=Account
+header.login=sign in
+
+
+footer.about=About
+footer.support=Support
+footer.api=Api
+footer.legals=Legals
+footer.jobs=Jobs
+footer.blog=Blog
+footer.contact=Contact
+
+buildwall.create.message=Oops, no Build Wall yet. Let's create your first one !
+buildwall.create.button=Create !
+buildwall.delete.all.button=Delete Wall
+buildwall.name=Name
+buildwall.url.message=Great ! You can now configure your Hudson or Team city plugin with this url:
+buildwall.fullscreen=Full Screen
+buildwall.normalscreen=Normal
+buildwall.title=Oops
+buildwall.infos.label=Build Wall Infos
+buildwall.plugin.title=Downloads
+buildwall.plugin.hudson=Hudson Plugin
+buildwall.plugin.teamcity=Team City Plugin
+buildwall.plugin.bamboo=Bamboo Plugin
+buildwall.contactus=Contact us 
+buildwall.contactus.title=Contact Us
+buildwall.contactus.question=Still have questions? 
+buildwall.notice.title=How does it work?
+buildwall.notice=Once you've created your BuildWall, download the plugin for your continuous integration tool, and then configure it with the supplied URL. <br/> Switch to full screen at any time, then press F11. <br/> Simply click on the screen to return to normal.
+buildwall.no.data.yet=No data yet..
+buildwall.buildsPerScreen=Builds per screen
+buildwall.error.infos=must be a number
+buildwall.config=Config
+buildwall.update.button=Save
+buildwall.reset.button=reset
+buildwall.generate-new-url.button=new url
+
+application.signup.now=Sign Up Now !
+application.buildwall=Build Wall
+application.feature.1.title=All the benefits of Cloud
+application.feature.1=Your buildwall is hosted on the web thus guaranteing uninterrupted/continuous service and reachability while ensuring total privacy.
+application.feature.2.title= Gravatar
+application.feature.2=Buildwall is compatible with the <a target="_blank" href="http://gravatar.com">Gravatar</a> service, it allows employees to change their avatar simply, anytime!
+application.feature.3.title=Integrate easily
+application.feature.3=With our API, integrate easily to your software factory. We have developed three <a target="_blank" href="https://github.com/buildwall">open source</a> plugins for <a target="_blank" href="http://hudson-ci.org">Hudson</a>, <a target="_blank" href="http://www.jetbrains.com/teamcity">Team City</a> and <a target="_blank" href="http://www.atlassian.com/software/bamboo/">Bamboo</a>. Enjoy!
+application.infos.title= BuildWall
+application.infos=The Buildwall online service displays informations about your software factory (projects) state(s) on one or more screens. It integrates easily with your continuous integration tool, thanks to its api. <br/>Customize your wall to meet your needs !<br/><br/> Our team is here to help, please send us your ideas for improvement.
+application.free.trial=Free during the beta. Enjoy!
+application.text.connected=Go now to your 
+
+pricing.select.plan=Select Plan
+pricing.max.builds=Max Builds
+pricing.max.walls=Max Walls
+pricing.api.access=API Access
+pricing.multiscreen=Multi Screen
+pricing.plan1.title=Non commercial
+pricing.plan1.price=Free
+pricing.plan2.title=Start
+pricing.plan2.price=€4.90 Monthly
+pricing.plan3.title=Medium
+pricing.plan3.price=€9.90 Monthly
+pricing.plan4.title=Large
+pricing.plan4.price=€19.90 Monthly
+pricing.plan1.max.builds=9 *
+pricing.plan2.max.builds=9
+pricing.plan3.max.builds=16
+pricing.plan4.max.builds=25
+pricing.plan1.max.walls=1
+pricing.plan2.max.walls=2
+pricing.plan3.max.walls=5
+pricing.plan4.max.walls=12
+pricing.coming.soon=Coming soon !
+pricing.faq2.title=What if I need a larger plan?
+pricing.faq2=Contact us at support@buildwall.com to work something out. We also offer an installable version for enterprise customers.
+pricing.faq3.title=Is there a free trial?
+pricing.faq3=Yes, there's 30 days free trial on all plans.
+pricing.faq1.title=* Unlimited builds during the beta
+pricing.faq1=You can publish unlimited builds during the beta. Enjoy!
+pricing.faq4.title=
+pricing.faq4=
+
+signup.instructions.title=Signup instructions
+signup.instructions=The registration information will be used only for billing. <br/> Please note that during the Beta, your account may be deleted at any time without notice
+signup.politics.title=Our politics
+signup.nospam=No spams
+signup.noads=No ads
+signup.contactus.title=Contact Us
+signup.contactus.question=Still have questions? 
+signup.contactus=Contact Us
+signup.account.title=Account Info
+signup.desired.username=Desired username
+signup.firstname=First name
+signup.lastname=Last name
+signup.password=Password
+signup.confirm.password=Confirm password
+signup.email=Email address
+signup.confirm.email=Confirm email address
+signup.billing.title=Billing Info
+signup.company=Company
+signup.terms=I accept terms of use 
+signup.terms.infos=Checking this box indicates that you accept <a target="_blank" href="#!/terms">terms of use</a>.
+signup.button.text=Complete Signup 
+user.already.exist=This user name already exists !
+
+header.team=Team
+team.title=Team
+team.notice.title=What should I do?
+team.notice=Here, you can map team member names with Gravatar.
+team.notice2.title=Infos
+team.notice2=The team configuration is used by your walls.
+team.new=add a new team member
+team.description=Gravatar (email) or text description:
+team.aliases=Aliases (separate by comma):
+team.save=save
+team.delete=delete
+
+tour.team=Set up a Team
+tour.fullscreen=Show the wall on large screen
+tour.wall=Create a wall
+tour.bamboo=Bamboo plugin
+tour.hudson=Hudson plugin
+tour.teamcity=Team City plugin
+

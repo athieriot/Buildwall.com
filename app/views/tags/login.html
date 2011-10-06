@@ -1,0 +1,65 @@
+	
+	<div id="login-component">
+		<div class=login>
+			<form id="login" action="#">
+				<div class="login-inner">
+					<div id="login-error"></div>
+					<label id="label-user" for="login-input">&{'secure.login'}
+					<input type="text" name="login" id="login-input" value="${flash.login}" /></label>
+					<label id="label-password" for="password">&{'secure.password'}
+					<input type="password" name="password" id="password" value="" /></label>
+					<label id="label-remember" for="remember">&{'secure.remember'}
+					<input type="checkbox" name="remember" id="remember" value="true" ${flash.remember ? 'checked="true"' : ''} /></label>
+					<div id="div-button-login">
+						<a href="javascript:;" id="cancel-button"><span>&{'secure.cancel'}</span></a>
+						&{'general.or'}
+						<a href="javascript:;" class="button" id="login-button"><span>&{'secure.signin'}</span></a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		var onSuccessLogin = function (username){
+            var url = "@{BuildWall.wall()}";
+             url = url.replace(/^.*#/, '');
+            $.history.load(url);
+		}
+		var doLogin = function (){
+			var login = $('#login-input').val();
+			var password = $('#password').val();
+			var rememberme = $('#remember').is(':checked');
+			$.ajax({
+				url: '@{Security.ajaxlogin()}',
+				success: onSuccessLogin,
+				data: ({'login' : login, 'password' : password, 'remember': rememberme}),
+				type: "POST",
+				error: function() {
+					$('#login-error').html("&{'secure.login.error'}");
+				}
+			});
+		}
+	
+		 $(document).ready(function() {
+
+			$('#login-button').click(function(e) {
+				e.preventDefault();
+				doLogin();
+			});
+			
+			$('#cancel-button').click(function(e) {
+				e.preventDefault();
+				$("#login-component").toggle();
+			});
+			
+			$('form#login input').keypress(function(e){
+			      if(e.which == 13){
+			    	  e.preventDefault();
+			    	  doLogin();
+			      }
+		     });
+
+	 	});
+		
+	</script>

@@ -1,0 +1,294 @@
+<div id="buildList"></div>
+<input id="buildwall-wallkey-input" value="${_wallKey}" type="hidden"></input>
+<input id="buildwall-wallid-input" value="${_wallId}" type="hidden"></input>
+
+<script type="text/javascript">
+var manualAbort = false;
+var xhr;
+var getBuilds = function(wall) {
+    var randomNumber = Math.floor(Math.random() * 2048);
+
+    xhr = $.ajax({
+        url: '@{BuildWallAPI.newBuilds()}',
+        data: ({'wallId' : wall.id, 'wallKey' : wall.wallKey, 'play':randomNumber}),
+        success: function(buildList) {
+            if (buildList) {
+                drawBuildList(wall, buildList);
+            }
+        },
+        dataType: 'json',
+        complete : function (xhr, status) {
+            if ($('#buildList').is(':visible') && !manualAbort) {
+                if (xhr.status == 0) {
+                    setTimeout(function() {
+                        getBuilds(wall);
+                    }, 10000);
+                } else {
+                    setTimeout(function() {
+                        getBuilds(wall);
+                    }, 2000);
+                }
+            }
+
+            if (manualAbort) manualAbort = false;
+        }
+    });
+
+
+};
+
+function showAuthorsName(authors, buildId) {
+    for (var i = 0; i < authors.length; i++) {
+        var cssClass = "author";
+        if (i == 0) cssClass += " first-author-" + buildId;
+        $("#" + buildId).append('<div class="' + cssClass + '"><span>' + authors[i] + '</span></div>');
+    }
+
+    var divBuild = $('#' + buildId);
+    var height = divBuild.height();
+    $('.first-author-' + buildId).css('margin-top', (height * 0.7) - (height * authors.length / 18));
+    $('.author').css('font-size', height / 18);
+}
+
+// Display a message
+var display = function(build) {
+    var wallKey = $('#buildwall-wallkey-input').val();
+    var wallId = $('#buildwall-wallid-input').val();
+    var buildId = 'build-' + build.id;
+    if ($('#' + buildId).length > 0) {
+        $('#' + buildId).removeClass('build-status-FAILED build-status-SUCCESS build-status-BUILDING');
+        $('#' + buildId).addClass('build-status-' + build.status);
+        $('#' + buildId).html(
+                '<div id="' + buildId + 'title" class="build-title">' + build.title + '</div>' +
+                        '<div id="' + buildId + 'subtitle" class="build-subtitle">' + build.subtitle + '</div>' +
+                        '<div id="' + buildId + 'status" class="build-status"> ' + build.status + '</div>' +
+                        '<div id="' + buildId + 'date" class="build-date"> ' + build.date + '</div>' +
+                        '<img id="' + buildId + 'image"/>'
+                );
+        var buildDiv = $('#' + buildId).detach();
+        buildDiv.prependTo('#buildList');
+    } else {
+        $('#buildList').prepend(
+                '<div id="' + buildId + '" class="build-status-' + build.status + ' build">' +
+                        '<div id="' + buildId + 'title" class="build-title">' + build.title + '</div>' +
+                        '<div id="' + buildId + 'subtitle" class="build-subtitle">' + build.subtitle + '</div>' +
+                        '<div id="' + buildId + 'status" class="build-status"> ' + build.status + '</div>' +
+                        '<div id="' + buildId + 'date" class="build-date"> ' + build.date + '</div>' +
+                        '<img id="' + buildId + 'image" />' +
+                        '</div>');
+    }
+
+    if (!build.subtitle) {
+        $("#" + buildId + "subtitle").hide();
+    }
+
+    $.ajax({
+        url: '@{BuildWallAPI.image()}',
+        data : {'authors' : build.authors, 'wallId' : wallId, 'wallKey' : wallKey},
+        success: function(url) {
+            if (url) {
+                $("#" + buildId + "image").attr('src', url);
+            } else {
+                $("#" + buildId + "image").hide();
+                showAuthorsName(build.authors, buildId);
+            }
+        },
+        error: function() {
+            $("#" + buildId + "image").hide();
+            showAuthorsName(build.authors, buildId);
+        }
+    });
+};
+
+var drawBrick = function() {
+    // draw build Brick
+    var divWall = $('#buildList');
+    var divBuildList = $('#buildList > div.build');
+    var buildLength = divBuildList.length;
+    var diviser = computeDiviser(buildLength, divWall.width(), divWall.height());
+    // Hide some useless information
+    $('.build-date').hide();
+    $('.build-status').hide();
+
+    // hide block by default
+    divBuildList.hide();
+    if (divWall.width() > divWall.height()) {
+        var tmp = diviser.y;
+        diviser.y = diviser.x
+        diviser.x = tmp;
+    }
+    var height = divWall.height() / diviser.y;
+    var width = divWall.width() / diviser.x;
+
+    // compute no data yet block
+    if (buildLength > 0) {
+        $('#wall-no-data').hide();
+    } else {
+        $('#wall-no-data').css('font-size', height / 7);
+        $('#wall-no-data').css('padding-top', height * 3 / 7);
+    }
+
+    // compute font size
+    $('.build-title').css('font-size', height / 12);
+    $('.build-subtitle').css('font-size', height / 18);
+    $('.author').css('font-size', height / 18);
+
+    var col = 0;
+    var cpt = -1;
+    $(divBuildList).each(function() {
+        if (col == diviser.x) {
+            col = 0;
+        } else {
+            cpt++;
+        }
+        $(this).height(height);
+        $(this).width(width);
+        $(this).css('top', -height * cpt);
+        $(this).css('left', width * col);
+        $(this).show();
+        col++;
+
+        var buildId = $(this).attr('id');
+
+        var titleHeight =   $('#'+buildId+'title').height();
+        var subtitleHeight =   $('#'+buildId+'subtitle').height();
+        // compute image size
+        var imgSize = height - titleHeight - subtitleHeight-10;
+        if (width - 5 < imgSize) {
+            imgSize = width - 5;
+        }
+        $('#'+buildId+'image').height(imgSize);
+        $('#'+buildId+'image').width(imgSize);
+
+        // compute authors text position
+        var authorsLength = $('.author', this).length;
+        $('.first-author-' + buildId).css('margin-top', (height * 0.7) - (height * authorsLength / 18));
+    });
+}
+
+// Retrieve new messages
+var drawBuildList = function(wall, buildList) {
+    if (buildList.length > 0) {
+        $(buildList).each(function(i) {
+            if (i >= buildList.length - wall.buildsPerScreen) {
+                display(this);
+            }
+        });
+        // on notification delete old builds
+        $('#buildList > div.build').each(function(i) {
+            if (i >= wall.buildsPerScreen) {
+                $(this).remove();
+            }
+        });
+        ;
+
+    } else {
+        $('#buildList').html('<div id="wall-no-data"><span>&{"buildwall.no.data.yet"}</span></div>')
+    }
+
+    drawBrick();
+};
+
+var computeDiviser = function(buildSize, width, height) {
+    var result = {'x': 0, 'y':0};
+    var ratio = width / height;
+    if (ratio < 1) {
+        ratio = 1 / ratio;
+    }
+
+    for (var i = 1; true; i++) {
+        for (var j = i; j < i + ratio; j++) {
+            if (i * j >= buildSize) {
+                result.x = i;
+                result.y = j;
+                return result;
+            }
+        }
+    }
+}
+
+var drawWall = function(wall) {
+    if (wall) {
+        $('#buildwall-wallid-input').val(wall.id);
+        $('#buildwall-wallkey-input').val(wall.wallKey);
+        $('#buildwall-name-input').val(wall.name);
+        $('#buildwall-builds-per-screen-input').val(wall.buildsPerScreen);
+        $('#config-link').removeClass("active");
+        // TODO : simplifier avec une class
+        $('#buildwall-title').html(wall.name);
+        $("#buildwall-create").hide();
+        $("#buildwall-update").hide();
+        $('#buildwall-reset').fadeIn("slow");
+        $('#url-message').html("&{'buildwall.url.message'}")
+        var buildWallUrl = "@@{Application.index}" + wall.id + "/" + wall.wallKey;
+        $('#url-message').append("<br/><a target='_blank' id='buildwall-url' nowrap href='" + buildWallUrl + "'>" + buildWallUrl + "</a>");
+        $('#url-message').fadeIn("slow");
+        $('#config-link').fadeIn("slow");
+        $('a#fullscreen-link').fadeIn("slow");
+        $("#buildList").fadeIn("slow");
+        drawBuildList(wall, wall.buildList);
+        getBuilds(wall);
+    } else {
+        $('#url-message').hide();
+        $('#buildList').hide();
+        $('#config-link').hide();
+        $('a#fullscreen-link').hide();
+        $('#buildList').empty();
+        $('#buildwall-reset').hide();
+        $('#buildwall-divform-inputs').detach().prependTo('#buildwall-create-inputs');
+        $('#buildwall-divform-inputs').show();
+        $("#buildwall-create").fadeIn("slow");
+        $('#buildwall-title').html("&{'buildwall.title'}");
+        $('#buildwall-name-input').focus();
+    }
+};
+
+var listBuilds = function() {
+    var wallKey = $('#buildwall-wallkey-input').val();
+    var wallId = $('#buildwall-wallid-input').val();
+    if (wallKey && wallId) {
+        $.ajax({
+            url: '@{BuildWallAPI.wall()}',
+            data: ({'wallId' : wallId, 'wallKey' : wallKey}),
+            success: drawWall,
+            error:function() {
+                drawWall();
+            }
+        });
+    } else {
+        $.ajax({
+            url: '@{BuildWall.list()}',
+            success: drawWall,
+            error:function() {
+                drawWall();
+            }
+        });
+    }
+};
+
+
+$(document).ready(function() {
+    listBuilds();
+
+    $('#header #menu_nav a').click(function() {
+        manualAbort = true;
+        xhr.abort();
+    });
+
+    $('#footer a').click(function() {
+        manualAbort = true;
+        xhr.abort();
+    });
+
+    $('#config-link').click(function() {
+        manualAbort = true;
+        xhr.abort();
+    });
+
+    $('#buildwall-reset').click(function() {
+        manualAbort = true;
+        xhr.abort();
+    });
+});
+
+</script>

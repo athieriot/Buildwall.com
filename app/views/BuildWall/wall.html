@@ -1,0 +1,117 @@
+<div class="header page">
+    <h1 id="buildwall-title">&{'buildwall.title'}</h1>
+    <ul>
+        <li id="config-link"><a href="javascript:;">&{'buildwall.config'}</a></li>
+        <li id="fullscreen-link"><a href="javascript:;">&{'buildwall.fullscreen'}</a></li>
+    </ul>
+</div>
+
+<div class="padding">
+    <div class="left">
+        <p id="url-message"></p>
+        #{wall/wall /}
+        #{wall/formInput /}
+        #{wall/create /}
+        #{wall/update /}
+        <!-- <a href="javascript:;" id="buildwall-delete-all-button">&{'buildwall.delete.all.button'}</a> -->
+        <a href="javascript:;" id="buildwall-reset">&{'buildwall.reset.button'}</a>
+        <!--<a href="javascript:;" id="buildwall-generate-new-url">&{'buildwall.generate-new-url.button'}</a> -->
+    </div>
+
+    <div class="right">
+        <div class="sidebar_box">
+            <h4>&{'buildwall.notice.title'}</h4>
+
+            <p>&{'buildwall.notice'}</p>
+        </div>
+
+        <div class="sidebar_box">
+            <h4>&{'buildwall.plugin.title'}</h4>
+            <ul>
+                <li><a href="@{'/public/plugins/wall-hudson-plugin.zip'}"> &{'buildwall.plugin.hudson'}</a></li>
+                <li><a href="@{'/public/plugins/wall-teamcity-plugin-1.0.zip'}">&{'buildwall.plugin.teamcity'}</a></li>
+                <li><a href="@{'/public/plugins/buildwall-bamboo-plugin-1.0.1.zip'}">&{'buildwall.plugin.bamboo'}</a></li>
+            </ul>
+        </div>
+
+        <!--	TODO : tag contact US ?		-->
+        <div class="sidebar_box">
+            <h4>&{'buildwall.contactus.title'}</h4>
+
+            <p>&{'buildwall.contactus.question'}<a id="buildwall-contactus" href="mailto:contact@buildwall.com">&{'buildwall.contactus'}</a>!
+            </p>
+        </div>
+    </div>
+    <div class="clear"></div>
+
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('div#header li').removeClass('active');
+        $('div#header li:contains("&{'header.wall'}")').addClass('active');
+        initStyle();
+
+        $('#buildwall-delete-all-button').click(function(link) {
+            link.preventDefault();
+            $.ajax({
+                url: '@{deleteAll()}',
+                success: drawWall,
+                type: "POST"
+            });
+        });
+
+        $('#buildwall-reset').click(function(link) {
+            var wallKey = $('#buildwall-wallkey-input').val();
+            var wallId = $('#buildwall-wallid-input').val();
+            link.preventDefault();
+            $.ajax({
+                url: '@{BuildWallAPI.reset()}',
+                success: drawWall,
+                data: ({'wallId' : wallId, 'wallKey' : wallKey}),
+                type: "POST"
+            });
+        });
+
+        $('#buildwall-generate-new-url').click(function(link) {
+            var wallKey = $('#buildwall-wallkey-input').val();
+            var wallId = $('#buildwall-wallid-input').val();
+            link.preventDefault();
+            $.ajax({
+                url: '@{BuildWallAPI.newWallKey()}',
+                success: drawWall,
+                data: ({'wallId' : wallId, 'wallKey' : wallKey}),
+                type: "POST"
+            });
+        });
+
+
+        $('#config-link').click(function(link) {
+            link.preventDefault();
+            $('#config-link').addClass("active");
+            $('#buildList').hide();
+            $('#buildwall-reset').hide();
+            $('#buildwall-divform-inputs').detach().prependTo('#buildwall-update-inputs');
+            $('#buildwall-divform-inputs').show();
+            $("#buildwall-update").fadeIn("slow");
+            $('#url-message').hide();
+            $("div#header li.active a").css({ '-moz-border-radius': '6px', '-webkit-border-radius': '6px', 'border-radius': '6px' });
+            $('#buildwall-name-input').focus();
+        });
+
+        var fullScreen = function () {
+            window.open('@{Buildwall.fullScreen()}', '', 'fullscreen=yes, scrollbars=auto');
+        };
+
+        $('#fullscreen-link').click(function(link) {
+            link.preventDefault();
+            fullScreen();
+        });
+
+        $('#buildList').click(function() {
+            fullScreen();
+        });
+
+    });
+
+</script>

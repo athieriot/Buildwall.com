@@ -1,0 +1,153 @@
+<div class="header page">
+    <h1 id="team-title">&{'team.title'}</h1>
+    <ul>
+    </ul>
+</div>
+
+<script type="text/javascript">
+    var save = function (element) {
+            var div = $(element).parent();
+            var description = $.trim($('.description', div).val());
+            var aliases = $('.aliases', div).val();
+            var memberId = div.attr('id');
+            if (description.indexOf('@') != -1) {
+                $('img.avatar', div).attr("src", "http://www.gravatar.com/avatar/" + $.md5(description));
+            }
+            $.ajax({
+                url: '@{save()}',
+                data: ({'memberId': memberId, 'description' :description, 'aliases' : aliases}),
+                success: function(id) {
+                    div.attr('id', id);
+                    div.removeClass('new-member');
+                },
+                type:"POST"
+            });
+
+    };
+    var init = function(context){
+          $('input', context).focusout(function () {
+              save(this);
+          });
+
+        $('input', context).keypress(function(e){
+              if(e.which == 13){
+                  e.preventDefault();
+                  save(this);
+              }
+         });
+
+        $('a.team-delete', context).click( function () {
+            var div = $(this).parent();
+            var memberId = div.attr('id');
+            if (memberId) {
+                $.ajax({
+                    url: '@{delete()}',
+                    data: ({'memberId': memberId}),
+                    success: function() {
+                        div.remove();
+                    },
+                    type:"DELETE"
+                });
+            } else {
+                div.remove();
+            }
+
+        });
+    };
+
+    function cloneMemberDiv() {
+        var newMember = $(".template").clone();
+        newMember.removeClass('template');
+        newMember.addClass('newMember');
+        newMember.prependTo('#team-inputs').show();
+        init(newMember);
+    }
+    $(document).ready(function() {
+
+        $('div#header li').removeClass('active');
+        $("div#header li:contains('&{"header.team"}')").addClass("active");
+        initStyle();
+        $.ajax({
+            url: '@{list()}',
+            success: function(team) {
+                if(team.length < 1){
+                    cloneMemberDiv();
+                } else {
+                    $(team).each(function() {
+                        var newMember = $(".template").clone();
+                        newMember.removeClass('template');
+                        $('.description', newMember).val(this.description);
+                        $('.aliases', newMember).val(this.aliases);
+                        newMember.attr('id', this.id);
+                        if (this.description.indexOf('@') != -1) {
+                            $('img.avatar', newMember).attr("src", "http://www.gravatar.com/avatar/" + $.md5(this.description));
+                        }
+                        newMember.prependTo('#team-inputs').show();
+                        init(newMember);
+                    });
+                }
+            },
+            type:"GET"
+        });
+
+        $('a#team-new').click(function () {
+            cloneMemberDiv();
+        });
+
+    });
+</script>
+
+<div class="padding">
+    <div class="left">
+        <form action="#">
+            <a id="team-new" href="javascript:"><img class="new-member" src="@{'/public/images/icons/add-member.png'}" alt="&{'team.new'}" /></a>
+            <div class="clear"></div>
+            <div id="team-inputs"></div>
+            <div class="template team-member" style="display:none;">
+                <div class="clear"></div>
+                <a class="team-delete" href="javascript:"><img class="delete" src="@{'/public/images/x.png'}" alt="&{'team.delete'}" /></a>
+                <img class="avatar">
+                #{field 'teamMember.description'}
+                    <label>&{'team.description'}</label>
+                    <input class="${field.errorClass} text_field required description" type="text"
+                           name="${field.name}"/>
+                    <span class="error">${field.error}</span>
+                #{/field}
+
+                #{field 'teamMember.aliases'}
+                    <label>&{'team.aliases'}</label>
+                    <input class="${field.errorClass} text_field required aliases" type="text" name="${field.name}"/>
+                    <span class="error">${field.error}</span>
+                #{/field}
+
+               <!-- <a class="team-save" href="javascript:;">&{'team.save'}</a>
+                <span> &{'general.or'} </span>  -->
+            </div>
+        </form>
+        <div class="clear"></div>
+    </div>
+
+    <div class="right">
+        <div class="sidebar_box">
+            <h4>&{'team.notice.title'}</h4>
+
+            <p>&{'team.notice'}</p>
+        </div>
+
+        <div class="sidebar_box">
+            <h4>&{'team.notice2.title'}</h4>
+
+            <p>&{'team.notice2'}</p>
+        </div>
+
+        <!--	TODO : tag contact US ?		-->
+        <div class="sidebar_box">
+            <h4>&{'buildwall.contactus.title'}</h4>
+
+            <p>&{'buildwall.contactus.question'}<a id="buildwall-contactus" href="mailto:contact@buildwall.com">&{'buildwall.contactus'}</a>!
+            </p>
+        </div>
+    </div>
+    <div class="clear"></div>
+
+</div>

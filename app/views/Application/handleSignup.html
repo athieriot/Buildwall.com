@@ -1,0 +1,23 @@
+	<p><h1>User created !</h1></p>
+
+		<p>
+			<strong>Desired username</strong> is ${user.username}
+		</p>
+		<p>
+			<strong>First name</strong> is ${user.firstname}
+		</p>
+		<p>
+			<strong>Last name</strong> is ${user.lastname}
+		</p>
+		<p>
+			<strong>Email</strong> is ${user.email}
+		</p>
+
+		<a id="signup-goto-buildwall" href="#!@{BuildWall.wall()}" class="button submit"><span>configure your buildwall now !</span></a> 
+
+ <script type="text/javascript">
+	$(document).ready(function() {
+		initStyle();
+		//$('a#signup-goto-buildwall').click(redirectLink);
+	 });
+</script>

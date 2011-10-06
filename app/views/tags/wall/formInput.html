@@ -1,0 +1,18 @@
+<div id="buildwall-divform-inputs" style="display:none;">
+#{field 'wall.name'}
+<p>
+    <label>&{'buildwall.name'}</label>
+    <input class="${field.errorClass} text_field required" type="text" name="${field.name}" id="buildwall-name-input"/>
+    <span class="error">${field.error}</span>
+</p>
+#{/field}
+
+#{field 'wall.buildsPerScreen'}
+<p>
+    <label>&{'buildwall.buildsPerScreen'}</label>
+    <input class="${field.errorClass} text_field required number" type="number" name="${field.name}"
+           id="buildwall-builds-per-screen-input" value="9"/>
+    <span class="error">${field.error}</span>
+</p>
+#{/field}
+ </div>

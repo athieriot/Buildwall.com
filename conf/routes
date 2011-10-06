@@ -1,0 +1,63 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                                       Application.index
+GET     /pricing                                Application.pricing
+GET     /signup                           	    Application.signup
+GET     /about                    	        	Application.about
+#GET     /contact                              	Application.contact
+GET     /legals                              	Application.legals
+GET     /home                                   Application.home
+GET     /terms                                  Application.terms
+GET     /help                                  Application.help
+GET     /tour                                  Application.tour
+
+# Map static resources from the /app/public folder to the /public path
+GET     /public/                                staticDir:public
+#work around fir fancybox bug
+GET     /fancybox/                              staticDir:public/javascripts/fancybox
+
+# Pages
+GET 	/buildwall								BuildWall.wall		
+GET     /fullscreen                             BuildWall.fullScreen						
+GET     /logout         						Security.logout
+GET     /admin/allUsers                         admin.Admin.allUsers
+GET     /admin/allWalls                         admin.Admin.allWalls
+GET     /team                                   Team.team
+GET     /team/list                              Team.list
+
+# Import CRUD routes
+*       /admin                                  module:crud
+
+
+#AJAX STUFF (NOT API)
+POST	/ajaxlogin								Security.ajaxlogin
+PUT		/wall/create    						BuildWall.create
+GET		/wall/list								BuildWall.list
+POST	/wall/deleteAll							BuildWall.deleteAll
+GET		/user/name								Security.userName
+POST    /team/save                              Team.save
+DELETE  /team/delete                            Team.delete
+
+#Morlhon's project compatibility 
+GET		/{wallId}/{wallKey}/publish				BuildWallAPI.publish
+
+#API STUFF
+POST	/user/create							Application.handleSignup
+#GET	/notify/build							BuildWallAPI.notifyBuild
+GET		/wall/newBuilds						 	BuildWallAPI.newBuilds
+POST    /wall/update							BuildWallAPI.update
+DELETE  /wall									BuildWallAPI.delete
+POST    /wall/reset     						BuildWallAPI.reset
+POST    /wall/newWallKey     				    BuildWallAPI.newWallKey
+GET     /wall                 				    BuildWallAPI.wall
+GET     /wall/image                             BuildWallAPI.image
+
+# Secure routes
+GET			/login			Secure.login
+POST        /login          Secure.authenticate
+GET         /logout         Secure.logout
+
+GET      /{wallId}/{wallKey}                     BuildWallAPI.fullScreen
