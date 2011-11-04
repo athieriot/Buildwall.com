@@ -1,7 +1,9 @@
 package controllers;
 
 import models.User;
-import play.mvc.*;
+import play.mvc.Mailer;
+
+import static play.Play.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -13,7 +15,7 @@ import play.mvc.*;
 
 public class Mails extends Mailer {
 
-    private static final String MAIL_FROM = "Buildwall.com <no-reply@buildwall.com>";
+    private static final String MAIL_FROM = "Buildwall.com <" + configuration.getProperty("mail.noreply") + ">";
 
     private static final String USER_CREATED_SUBJECT = "Welcome to Builwall.com";
 
