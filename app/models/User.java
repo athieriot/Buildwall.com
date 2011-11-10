@@ -7,7 +7,7 @@ import play.db.jpa.Model;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
-import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,7 +27,17 @@ public class User extends Model {
     @Required @Email public String email;
     @Required @Equals("email") public String emailConfirm;
     @Required @IsTrue public boolean termsOfUse;
+    @Required public Date creationDate = new Date();
+    @Required public boolean activated = false;
     public String company;
+
+    public void activate() {
+        activated = true;
+    }
+
+    public boolean isActivated() {
+        return activated;
+    }
 
     public void addWall(Wall wall) {
         accessibleWalls.add(wall);

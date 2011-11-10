@@ -14,6 +14,11 @@ public class Security extends Secure.Security {
         User user = findUser(login);
 
         if (authenticate(password, user)) {
+            if(!activated(user)) {
+                //TODO: Need a more explicit error
+                forbidden();
+            }
+
             connect(user, remember);
             renderText(user.username);
         } else {
@@ -83,6 +88,10 @@ public class Security extends Secure.Security {
         } else {
             return false;
         }
+    }
+
+    static boolean activated(User user) {
+        return user.isActivated();
     }
 
     static boolean check(String profile) {
