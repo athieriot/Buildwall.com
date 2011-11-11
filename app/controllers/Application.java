@@ -63,7 +63,6 @@ public class Application extends Controller {
         user.password = Crypto.passwordHash(user.password);
         user.passwordConfirm = Crypto.passwordHash(user.passwordConfirm);
         user.save();
-        Security.connect(user, false);
 
         Mails.userCreated(user);
         render(user);

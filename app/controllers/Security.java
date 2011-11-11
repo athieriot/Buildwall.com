@@ -63,8 +63,7 @@ public class Security extends Secure.Security {
 
     static boolean authenticate(String login, String password) {
         User user = findUser(login);
-        //TODO: Need explicit error for activation issue
-        return isActivated(user) && authenticate(password, user);
+        return authenticate(password, user);
     }
 
     static User findUser(String login) {
@@ -84,7 +83,8 @@ public class Security extends Secure.Security {
     }
 
     static boolean authenticate(String password, User user) {
-        if(user != null && user.password.equals(Crypto.passwordHash(password))){
+        //TODO: Need a proper error for inactive users
+        if(user != null && user.password.equals(Crypto.passwordHash(password)) && user.isActivated()) {
             return true;
         } else if(user != null && user.password.equals(password)){
              // hack de migration a supprimer dans un certain temps...
@@ -95,10 +95,6 @@ public class Security extends Secure.Security {
         } else {
             return false;
         }
-    }
-
-    static boolean isActivated(User user) {
-        return user.isActivated();
     }
 
     static boolean check(String profile) {
