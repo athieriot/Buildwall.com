@@ -28,6 +28,6 @@ public class SecurityTest extends UnitTest {
         String code = Security.generateEmailToken(id, creationDateTimeStamp, email);
 
         // Then
-        assertThat(code, is(equalTo("56141207c6ed5a23a8108e9944201ad6d6f59d9d8063874af774c3a62222fc16")));
+        assertThat(code, is(equalTo("VhQSB8btWiOoEI6ZRCAa1tb1nZ2AY4dK93TDpiIi/BY=")));
     }
 }

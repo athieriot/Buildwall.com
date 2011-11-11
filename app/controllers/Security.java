@@ -49,7 +49,7 @@ public class Security extends Secure.Security {
             return null;
 
         String digestive = id.toString() + creationDateTimeStamp.toString() + email + CYPHER_INTERNAL_SUGAR;
-        return CypherUtil.sha256Hex(digestive);
+        return CypherUtil.sha256Base64(digestive);
     }
 
     static void connect(User user, boolean rememberme) {
