@@ -16,8 +16,14 @@
             <strong>Email</strong> is ${user.email}
         </p>
 
+        <br />
+        <span>The only thing you need to do is to activate your account by follow this </span>
+        <a href="@@{application.index}#!@{Secure.activate()}?email=${user.email}&token=${token}">
+           <span>@@{application.index}#!@{Secure.activate()}?email=${user.email}&token=${token}</span>
+       </a>
+
        <br />
-       <span>You can configure your buildwall </span>
+       <span>Then, you'll be able to configure your first buildwall </span>
        <a href="@@{application.index}#!@{BuildWall.wall()}">
            <span>here</span>
        </a>

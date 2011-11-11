@@ -3,7 +3,7 @@ package utils;
 /**
  * Created by IntelliJ IDEA.
  * User: Jean-Baptiste
- * Date: 4 déc. 2010
+ * Date: 4 dï¿½c. 2010
  * Time: 23:30:40
  * To change this template use File | Settings | File Templates.
  */
@@ -11,8 +11,15 @@ package utils;
 import java.util.*;
 import java.io.*;
 import java.security.*;
-public class MD5Util {
-  public static String hex(byte[] array) {
+public class CypherUtil {
+  public static String md5Hex (String message) {
+      return cypherHex("MD5", message);
+  }
+  public static String sha256Hex (String message) {
+      return cypherHex("SHA-256", message);
+  }
+
+  static String hex(byte[] array) {
       StringBuffer sb = new StringBuffer();
       for (int i = 0; i < array.length; ++i) {
 	  sb.append(Integer.toHexString((array[i]
@@ -20,10 +27,10 @@ public class MD5Util {
       }
       return sb.toString();
   }
-  public static String md5Hex (String message) {
+  static String cypherHex (String algorithm, String message) {
       try {
 	  MessageDigest md =
-	      MessageDigest.getInstance("MD5");
+	      MessageDigest.getInstance(algorithm);
 	  return hex (md.digest(message.getBytes("CP1252")));
       } catch (NoSuchAlgorithmException e) {
       } catch (UnsupportedEncodingException e) {

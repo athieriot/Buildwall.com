@@ -5,8 +5,11 @@ import play.Logger;
 import play.data.validation.Required;
 import play.db.jpa.GenericModel.JPAQuery;
 import play.libs.Crypto;
+import utils.CypherUtil;
 
 public class Security extends Secure.Security {
+
+    static final String CYPHER_INTERNAL_SUGAR = "rising skinny elephants is utterly boring";
 
     public static void ajaxLogin(@Required String login,
                                  @Required String password, boolean remember) throws Throwable {
@@ -14,11 +17,6 @@ public class Security extends Secure.Security {
         User user = findUser(login);
 
         if (authenticate(password, user)) {
-            if(!activated(user)) {
-                //TODO: Need a more explicit error
-                forbidden();
-            }
-
             connect(user, remember);
             renderText(user.username);
         } else {
@@ -46,6 +44,14 @@ public class Security extends Secure.Security {
         return findUser(Secure.connected());
     }
 
+    public static String generateEmailToken(Long id, Long creationDateTimeStamp, String email) {
+        if(id == null || creationDateTimeStamp == null || email == null)
+            return null;
+
+        String digestive = id.toString() + creationDateTimeStamp.toString() + email + CYPHER_INTERNAL_SUGAR;
+        return CypherUtil.sha256Hex(digestive);
+    }
+
     static void connect(User user, boolean rememberme) {
         // Mark user as connected
         session.put(Secure.LOGIN_KEY, user.username);
@@ -57,7 +63,8 @@ public class Security extends Secure.Security {
 
     static boolean authenticate(String login, String password) {
         User user = findUser(login);
-        return authenticate(password, user);
+        //TODO: Need explicit error for activation issue
+        return isActivated(user) && authenticate(password, user);
     }
 
     static User findUser(String login) {
@@ -90,7 +97,7 @@ public class Security extends Secure.Security {
         }
     }
 
-    static boolean activated(User user) {
+    static boolean isActivated(User user) {
         return user.isActivated();
     }
 

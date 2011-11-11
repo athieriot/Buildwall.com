@@ -44,6 +44,12 @@ public class Secure extends Controller {
          }
       }
    }
+   // ~~~ Activation
+
+   public static void activate() {
+      //TODO: User token and email validation
+      //TODO: Activate it
+   }
 
    // ~~~ Login
 
