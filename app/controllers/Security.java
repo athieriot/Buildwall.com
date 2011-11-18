@@ -78,7 +78,7 @@ public class Security extends Secure.Security {
         //TODO: Need a proper error for inactive users
         if(user != null && user.password.equals(Crypto.passwordHash(password)) && user.isActivated()) {
             return true;
-        } else if(user != null && user.password.equals(password)){
+        } else if(user != null && user.password.equals(password) && user.isActivated()){
              // hack de migration a supprimer dans un certain temps...
             user.password = Crypto.passwordHash(password);
             user.passwordConfirm = Crypto.passwordHash(user.passwordConfirm);
