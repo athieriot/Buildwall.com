@@ -44,14 +44,6 @@ public class Security extends Secure.Security {
         return findUser(Secure.connected());
     }
 
-    public static String generateEmailToken(Long id, Long creationDateTimeStamp, String email) {
-        if(id == null || creationDateTimeStamp == null || email == null)
-            return null;
-
-        String digestive = id.toString() + creationDateTimeStamp.toString() + email + CYPHER_INTERNAL_SUGAR;
-        return CypherUtil.sha256Base64(digestive);
-    }
-
     static void connect(User user, boolean rememberme) {
         // Mark user as connected
         session.put(Secure.LOGIN_KEY, user.username);

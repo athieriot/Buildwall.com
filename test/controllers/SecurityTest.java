@@ -4,8 +4,6 @@ import org.joda.time.DateTime;
 import org.junit.Test;
 import play.test.UnitTest;
 
-import java.util.Date;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 
@@ -25,7 +23,7 @@ public class SecurityTest extends UnitTest {
         String email = "test@test.com";
 
         // When
-        String code = Security.generateEmailToken(id, creationDateTimeStamp, email);
+        String code = Secure.generateEmailToken(id, creationDateTimeStamp, email);
 
         // Then
         assertThat(code, is(equalTo("VhQSB8btWiOoEI6ZRCAa1tb1nZ2AY4dK93TDpiIi/BY=")));

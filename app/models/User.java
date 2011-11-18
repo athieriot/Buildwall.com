@@ -32,7 +32,7 @@ public class User extends Model {
     public String company;
 
     public void activate() {
-        activated = true;
+        this.activated = true;
     }
 
     public boolean isActivated() {
