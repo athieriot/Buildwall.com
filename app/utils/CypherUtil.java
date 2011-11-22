@@ -18,7 +18,7 @@ public class CypherUtil {
       return cypherHex("MD5", message);
   }
   public static String sha256Base64(String message) {
-      return cypherBase64("SHA-256", message);
+      return cypherHex("SHA-256", message);
   }
 
   static String hex(byte[] array) {
@@ -35,9 +35,6 @@ public class CypherUtil {
 
   static String cypherHex(String algorithm, String message) {
       return hex(cypher(algorithm, message));
-  }
-  static String cypherBase64(String algorithm, String message) {
-      return base64(cypher(algorithm, message));
   }
 
   static byte[] cypher(String algorithm, String message) {
