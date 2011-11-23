@@ -1,6 +1,7 @@
 package controllers;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Date;
 import java.util.List;
 
 import models.User;
@@ -47,11 +48,11 @@ public class Secure extends Controller {
    }
    // ~~~ Activation
 
-   public static String generateEmailToken(Long id, Long creationDateTimeStamp, String email) {
-      if(id == null || creationDateTimeStamp == null || email == null)
+   public static String generateEmailToken(Long id, Long timestamp, String email) {
+      if(id == null || timestamp == null || email == null)
         return null;
 
-      String digestive = id.toString() + creationDateTimeStamp.toString() + email + controllers.Security.CYPHER_INTERNAL_SUGAR;
+      String digestive = id.toString() + timestamp + email + controllers.Security.CYPHER_INTERNAL_SUGAR;
       return CypherUtil.sha256Base64(digestive);
    }
 
@@ -73,7 +74,7 @@ public class Secure extends Controller {
 
     private static boolean isAllowedToActivation(String token, User attendee) {
         return attendee != null && token != null
-                && token.equals(generateEmailToken(attendee.id, attendee.creationDate.getTime(), attendee.email));
+                && token.equals(generateEmailToken(attendee.id, attendee.creationDate, attendee.email));
     }
 
     // ~~~ Login

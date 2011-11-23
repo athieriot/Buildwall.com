@@ -23,7 +23,7 @@ public class CleanLongInactives extends Job {
         DateTime oneMonthSooner = new DateTime();
         oneMonthSooner = oneMonthSooner.minusMonths(1);
 
-        List<User> longInactives = User.find("activated = false and creationDate < ?", oneMonthSooner.toDate()).fetch();
+        List<User> longInactives = User.find("activated = false and creationDate < ?", oneMonthSooner.getMillis()).fetch();
         for(User inactive : longInactives) {
             inactive.delete();
             Logger.info("Monthly maintenance. Inactive user : " + inactive.toString() + " has been exterminate.");

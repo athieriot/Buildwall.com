@@ -31,7 +31,7 @@ public class CleanLongInativesTest extends UnitTest {
         twoMonthsSooner = twoMonthsSooner.minusMonths(2);
 
         User inactive = User.find("username = 'Unbob'").first();
-        inactive.creationDate = twoMonthsSooner.toDate();
+        inactive.creationDate = twoMonthsSooner.getMillis();
         inactive.save();
 
         // When
@@ -50,7 +50,7 @@ public class CleanLongInativesTest extends UnitTest {
         twoWeeksSooner = twoWeeksSooner.minusWeeks(2);
 
         User inactive = User.find("username = 'Unbob'").first();
-        inactive.creationDate = twoWeeksSooner.toDate();
+        inactive.creationDate = twoWeeksSooner.getMillis();
         inactive.save();
 
         // When

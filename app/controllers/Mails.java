@@ -24,7 +24,7 @@ public class Mails extends Mailer {
         setSubject(USER_CREATED_SUBJECT);
         addRecipient(user.email);
 
-        String token = Secure.generateEmailToken(user.id, user.creationDate.getTime(), user.email);
+        String token = Secure.generateEmailToken(user.id, user.creationDate, user.email);
         send(user, token);
     }
 

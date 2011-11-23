@@ -27,7 +27,7 @@ public class User extends Model {
     @Required @Email public String email;
     @Required @Equals("email") public String emailConfirm;
     @Required @IsTrue public boolean termsOfUse;
-    @Required public Date creationDate = new Date();
+    @Required public Long creationDate = System.currentTimeMillis();
     @Required public boolean activated = false;
     public String company;
 
