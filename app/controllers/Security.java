@@ -5,8 +5,11 @@ import play.Logger;
 import play.data.validation.Required;
 import play.db.jpa.GenericModel.JPAQuery;
 import play.libs.Crypto;
+import utils.CypherUtil;
 
 public class Security extends Secure.Security {
+
+    static final String CYPHER_INTERNAL_SUGAR = "rising skinny elephants is utterly boring";
 
     public static void ajaxLogin(@Required String login,
                                  @Required String password, boolean remember) throws Throwable {
@@ -72,9 +75,10 @@ public class Security extends Secure.Security {
     }
 
     static boolean authenticate(String password, User user) {
-        if(user != null && user.password.equals(Crypto.passwordHash(password))){
+        //TODO: Need a proper error for inactive users
+        if(user != null && user.password.equals(Crypto.passwordHash(password)) && user.isActivated()) {
             return true;
-        } else if(user != null && user.password.equals(password)){
+        } else if(user != null && user.password.equals(password) && user.isActivated()){
              // hack de migration a supprimer dans un certain temps...
             user.password = Crypto.passwordHash(password);
             user.passwordConfirm = Crypto.passwordHash(user.passwordConfirm);

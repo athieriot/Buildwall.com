@@ -1,0 +1,23 @@
+User(active):
+  email: bob@gmail.com
+  emailConfirm: bob@gmail.com
+  termsOfUse: true
+  creationDate: 20101111
+  password: secret
+  passwordConfirm: secret
+  username: Bob
+  firstname: Bob
+  lastname: Moran
+  activated: true
+
+User(inactive):
+  email: unbob@gmail.com
+  emailConfirm: unbob@gmail.com
+  termsOfUse: true
+  creationDate: 20101111
+  password: secret
+  passwordConfirm: secret
+  username: Unbob
+  firstname: Unbob
+  lastname: Unmoran
+  activated: false

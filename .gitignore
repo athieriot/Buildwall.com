@@ -10,8 +10,11 @@
 *.velocity.log
 *.settings
 *.iml
+*.idea
 *.ipr
 *.log
 *.pmd
 *db/*
 *tmp/*
+*.swp
+out/

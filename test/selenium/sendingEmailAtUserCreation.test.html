@@ -1,0 +1,25 @@
+#{selenium 'Test email sending at user creation'}
+
+   // Given
+   open('#!/signup')
+   waitForPageToLoad(3000)
+   assertTextPresent('Email')
+   type('user_username', 'username')
+   type('user_firstname', 'firstname')
+   type('user_lastname', 'lastname')
+   type('user_password', 'password')
+   type('user_passwordConfirm', 'password')
+   type('user_email', 'test@test.com')
+   type('user_emailConfirm', 'test@test.com')
+   click('user_termsOfUse')
+
+   // When
+   click('create-button')
+
+   // Then
+   storeLastReceivedEmailBy('test@test.com', 'email')
+   store('javascript{/Subject:\s+(.*)/.exec(storedVars["email"])[1]}', 'subject')
+
+   assertEquals('Welcome to Builwall.com', '$[subject]')
+ 
+#{/selenium}

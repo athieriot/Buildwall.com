@@ -11,12 +11,13 @@ import play.mvc.Before;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.utils.Java;
+import utils.CypherUtil;
 
 public class Secure extends Controller {
 
    public final static String LOGIN_KEY = "username";
 
-   @Before(unless = {"login", "authenticate", "logout"})
+   @Before(unless = {"login", "activate", "authenticate", "logout"})
    static void checkAccess() throws Throwable {
       // Authent
       if (!session.contains(LOGIN_KEY) || Security.invoke("connectedUser") == null) {
@@ -44,8 +45,38 @@ public class Secure extends Controller {
          }
       }
    }
+   // ~~~ Activation
 
-   // ~~~ Login
+   public static String generateEmailToken(Long id, Long creationDateTimeStamp, String email) {
+      if(id == null || creationDateTimeStamp == null || email == null)
+        return null;
+
+      String digestive = id.toString() + creationDateTimeStamp.toString() + email + controllers.Security.CYPHER_INTERNAL_SUGAR;
+      return CypherUtil.sha256Base64(digestive);
+   }
+
+   public static void activate(@Required Long id,
+                               @Required String token) throws Throwable {
+      User attendee = User.findById(id);
+
+      if(isAllowedToActivation(token, attendee)) {
+          attendee.activate();
+          attendee.save();
+          // Mark user as connected
+            session.put("username", attendee.username);
+          //TODO: Redirection vers la page de build
+          redirect("/buildwall");
+      }
+
+      forbidden();
+   }
+
+    private static boolean isAllowedToActivation(String token, User attendee) {
+        return attendee != null && token != null
+                && token.equals(generateEmailToken(attendee.id, attendee.creationDate.getTime(), attendee.email));
+    }
+
+    // ~~~ Login
 
    public static void login() throws Throwable {
       autoConnect();
@@ -55,6 +86,11 @@ public class Secure extends Controller {
          flash.keep("url");
          render();
       }
+   }
+
+   static void authenticate(User user) throws Throwable {
+       if(user != null)
+           authenticate(user.username, user.password, true);
    }
 
    public static void authenticate(@Required String username, String password, boolean remember) throws Throwable {
@@ -127,7 +163,7 @@ public class Secure extends Controller {
       }
    }
 
-   public static class Security extends Controller {
+    public static class Security extends Controller {
 
       /**
        * @Deprecated

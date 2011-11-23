@@ -1,10 +1,9 @@
 package models;
 
-import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import play.data.validation.*;
 import play.db.jpa.Model;
-import utils.MD5Util;
+import utils.CypherUtil;
 
 import javax.persistence.Entity;
 import java.net.*;
@@ -44,7 +43,7 @@ public class TeamMember extends Model {
            return null; //new URL(baseURL.toString() + "/" + endURl);
        } else {
            try {
-               return new URL(URL_GRAVATAR + MD5Util.md5Hex(description) + MAX_GRAVATAR_SIZE);
+               return new URL(URL_GRAVATAR + CypherUtil.md5Hex(description) + MAX_GRAVATAR_SIZE);
            } catch (MalformedURLException e) {
                return null;
            }
